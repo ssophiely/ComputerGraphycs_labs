@@ -1,0 +1,11 @@
+D:\Users\admin\Desktop\ПГУ\3 курс\Компьютерная графика\lab1\bin\Debug\lab1.exe.config
+D:\Users\admin\Desktop\ПГУ\3 курс\Компьютерная графика\lab1\bin\Debug\lab1.exe
+D:\Users\admin\Desktop\ПГУ\3 курс\Компьютерная графика\lab1\bin\Debug\lab1.pdb
+D:\Users\admin\Desktop\ПГУ\3 курс\Компьютерная графика\lab1\obj\Debug\lab1.csproj.AssemblyReference.cache
+D:\Users\admin\Desktop\ПГУ\3 курс\Компьютерная графика\lab1\obj\Debug\lab1.csproj.SuggestedBindingRedirects.cache
+D:\Users\admin\Desktop\ПГУ\3 курс\Компьютерная графика\lab1\obj\Debug\lab1.Form1.resources
+D:\Users\admin\Desktop\ПГУ\3 курс\Компьютерная графика\lab1\obj\Debug\lab1.Properties.Resources.resources
+D:\Users\admin\Desktop\ПГУ\3 курс\Компьютерная графика\lab1\obj\Debug\lab1.csproj.GenerateResource.cache
+D:\Users\admin\Desktop\ПГУ\3 курс\Компьютерная графика\lab1\obj\Debug\lab1.csproj.CoreCompileInputs.cache
+D:\Users\admin\Desktop\ПГУ\3 курс\Компьютерная графика\lab1\obj\Debug\lab1.exe
+D:\Users\admin\Desktop\ПГУ\3 курс\Компьютерная графика\lab1\obj\Debug\lab1.pdb
