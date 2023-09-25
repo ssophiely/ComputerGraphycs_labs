@@ -85,5 +85,11 @@ namespace lab23
         {
             Ship.DrawCavalier(g);
         }
+
+        private void Reset_Click(object sender, EventArgs e)
+        {
+            g.Clear(Color.White);
+            Ship.Reset();
+        }
     }
 }

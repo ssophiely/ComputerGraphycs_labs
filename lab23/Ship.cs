@@ -46,6 +46,15 @@ namespace lab23
             displayCoordinatesB = GetDisplayCoordinates(coordinateMatrixB);
         }
 
+        // Сброс координат
+        public static void Reset()
+        {
+            Array.Clear(displayCoordinatesF, 0, displayCoordinatesF.Length);
+            Array.Clear(displayCoordinatesB, 0, displayCoordinatesB.Length);
+            displayCoordinatesF = coordinateMatrixF.Clone() as double[,];
+            displayCoordinatesB = coordinateMatrixB.Clone() as double[,];
+        }
+
 
         // Перевод из мировых в экранные
         public static double[,] GetDisplayCoordinates(double[,] matrix)
@@ -115,11 +124,12 @@ namespace lab23
             }
         }
 
-        // Отрисовка корабля в начальных координатах
+        // Отрисовка корабля
         public static void DrawBase(Graphics g)
         {
             DrawXY(g, new Pen(Color.Black, 2), displayCoordinatesF);
             DrawXY(g, new Pen(Color.Black, 2), displayCoordinatesB);
+            DrawConnection(g);
         }
 
         // Поворот корабля относительно OX

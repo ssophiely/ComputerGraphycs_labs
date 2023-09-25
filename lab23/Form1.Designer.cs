@@ -51,6 +51,7 @@
             this.rz = new System.Windows.Forms.NumericUpDown();
             this.RotateZ = new System.Windows.Forms.Button();
             this.Projection = new System.Windows.Forms.Button();
+            this.Reset = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.rx)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scx)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scy)).BeginInit();
@@ -66,7 +67,7 @@
             // 
             this.ClearAll.Location = new System.Drawing.Point(12, 12);
             this.ClearAll.Name = "ClearAll";
-            this.ClearAll.Size = new System.Drawing.Size(83, 29);
+            this.ClearAll.Size = new System.Drawing.Size(83, 31);
             this.ClearAll.TabIndex = 0;
             this.ClearAll.Text = "Очистить";
             this.ClearAll.UseVisualStyleBackColor = true;
@@ -76,9 +77,9 @@
             // 
             this.DrawBaseC.Location = new System.Drawing.Point(120, 12);
             this.DrawBaseC.Name = "DrawBaseC";
-            this.DrawBaseC.Size = new System.Drawing.Size(170, 53);
+            this.DrawBaseC.Size = new System.Drawing.Size(170, 31);
             this.DrawBaseC.TabIndex = 1;
-            this.DrawBaseC.Text = "Нарисовать в исходных координатах";
+            this.DrawBaseC.Text = "Нарисовать корабль";
             this.DrawBaseC.UseVisualStyleBackColor = true;
             this.DrawBaseC.Click += new System.EventHandler(this.DrawBaseC_Click);
             // 
@@ -119,7 +120,7 @@
             this.rx.Size = new System.Drawing.Size(71, 22);
             this.rx.TabIndex = 5;
             this.rx.Value = new decimal(new int[] {
-            90,
+            50,
             0,
             0,
             0});
@@ -159,10 +160,10 @@
             this.scx.Size = new System.Drawing.Size(71, 22);
             this.scx.TabIndex = 9;
             this.scx.Value = new decimal(new int[] {
-            2,
+            15,
             0,
             0,
-            0});
+            65536});
             // 
             // scy
             // 
@@ -172,10 +173,10 @@
             this.scy.Size = new System.Drawing.Size(71, 22);
             this.scy.TabIndex = 10;
             this.scy.Value = new decimal(new int[] {
-            2,
+            15,
             0,
             0,
-            0});
+            65536});
             // 
             // scz
             // 
@@ -185,10 +186,10 @@
             this.scz.Size = new System.Drawing.Size(71, 22);
             this.scz.TabIndex = 11;
             this.scz.Value = new decimal(new int[] {
-            2,
+            15,
             0,
             0,
-            0});
+            65536});
             // 
             // mz
             // 
@@ -260,7 +261,7 @@
             this.ry.Size = new System.Drawing.Size(71, 22);
             this.ry.TabIndex = 19;
             this.ry.Value = new decimal(new int[] {
-            90,
+            20,
             0,
             0,
             0});
@@ -282,7 +283,7 @@
             this.rz.Size = new System.Drawing.Size(71, 22);
             this.rz.TabIndex = 21;
             this.rz.Value = new decimal(new int[] {
-            90,
+            70,
             0,
             0,
             0});
@@ -299,19 +300,30 @@
             // 
             // Projection
             // 
-            this.Projection.Location = new System.Drawing.Point(120, 71);
+            this.Projection.Location = new System.Drawing.Point(120, 51);
             this.Projection.Name = "Projection";
-            this.Projection.Size = new System.Drawing.Size(170, 53);
+            this.Projection.Size = new System.Drawing.Size(170, 57);
             this.Projection.TabIndex = 22;
             this.Projection.Text = "Нарисовать проекцию Кавалье";
             this.Projection.UseVisualStyleBackColor = true;
             this.Projection.Click += new System.EventHandler(this.Projection_Click);
+            // 
+            // Reset
+            // 
+            this.Reset.Location = new System.Drawing.Point(12, 53);
+            this.Reset.Name = "Reset";
+            this.Reset.Size = new System.Drawing.Size(83, 34);
+            this.Reset.TabIndex = 23;
+            this.Reset.Text = "Сбросить";
+            this.Reset.UseVisualStyleBackColor = true;
+            this.Reset.Click += new System.EventHandler(this.Reset_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1255, 692);
+            this.Controls.Add(this.Reset);
             this.Controls.Add(this.Projection);
             this.Controls.Add(this.rz);
             this.Controls.Add(this.RotateZ);
@@ -379,6 +391,7 @@
         private System.Windows.Forms.NumericUpDown rz;
         private System.Windows.Forms.Button RotateZ;
         private System.Windows.Forms.Button Projection;
+        private System.Windows.Forms.Button Reset;
     }
 }
 
