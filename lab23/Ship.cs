@@ -13,19 +13,19 @@ namespace lab23
         public static int K = 12;
 
         // экранные координаты передней части 
-        public static double[,] displayCoordinatesF;
+        public static double[,] coordinateMatrixF;
 
         // экранные координаты задней части
-        public static double[,] displayCoordinatesB;
+        public static double[,] coordinateMatrixB;
 
         // матрица мировых координат
-        public static readonly double[,] coordinateMatrixF = { { 4, -7, 0, 1 }, { 4, -12, 0, 1 }, { -4, -12, 0, 1 },
+        private static readonly double[,] MatrixF = { { 4, -7, 0, 1 }, { 4, -12, 0, 1 }, { -4, -12, 0, 1 },
             { -4, -7, 0, 1 }, { 7, -7, 0, 1 }, { -7,-7,0, 1}, { 0.25F,12,0, 1},{ 0.25F,-7,0, 1}, { -0.25F,-7,0, 1},
             { -0.25F,12,0, 1},{ 0.25F,10,0, 1},{ 0.25F,-6,0, 1},{ 6,-1,0, 1}, { -0.25F,10,0, 1},
             { -0.25F,-6,0, 1},{ -4,-3,0, 1},{ -0.25F,11,0, 1},{ -3,11,0, 1}};
 
         // матрица мировых координат
-        public static readonly double[,] coordinateMatrixB = { { 4, -7, 3, 1 }, { 4, -12, 3, 1 }, { -4, -12, 3, 1 },
+        private static readonly double[,] MatrixB = { { 4, -7, 3, 1 }, { 4, -12, 3, 1 }, { -4, -12, 3, 1 },
             { -4, -7, 3, 1 }, { 7, -7, 3, 1 }, { -7,-7,3, 1}, { 0.25F,12,3, 1},{ 0.25F,-7,3, 1}, { -0.25F,-7,3, 1},
             { -0.25F,12,3, 1},{ 0.25F,10,3, 1},{ 0.25F,-6,3, 1},{ 6,-1,3, 1}, { -0.25F,10,3, 1},
             { -0.25F,-6,3, 1},{ -4,-3,3, 1},{ -0.25F,11,3, 1},{ -3,11,3, 1}};
@@ -41,37 +41,38 @@ namespace lab23
 
         static Ship()
         {
-            // Инициализация экранных координат
-            displayCoordinatesF = GetDisplayCoordinates(coordinateMatrixF);
-            displayCoordinatesB = GetDisplayCoordinates(coordinateMatrixB);
+            coordinateMatrixF = MatrixF.Clone() as double[,];
+            coordinateMatrixB = MatrixB.Clone() as double[,];
         }
+
 
         // Сброс координат
         public static void Reset()
         {
-            Array.Clear(displayCoordinatesF, 0, displayCoordinatesF.Length);
-            Array.Clear(displayCoordinatesB, 0, displayCoordinatesB.Length);
-            displayCoordinatesF = coordinateMatrixF.Clone() as double[,];
-            displayCoordinatesB = coordinateMatrixB.Clone() as double[,];
+            Array.Clear(coordinateMatrixF, 0, coordinateMatrixF.Length);
+            Array.Clear(coordinateMatrixB, 0, coordinateMatrixB.Length);
+            coordinateMatrixF = MatrixF.Clone() as double[,];
+            coordinateMatrixB = MatrixB.Clone() as double[,];
         }
 
 
         // Перевод из мировых в экранные
         public static double[,] GetDisplayCoordinates(double[,] matrix)
         {
-            for (int i = 0; i < matrix.GetUpperBound(0) + 1; i++)
+            var m = matrix.Clone() as double[,];
+            for (int i = 0; i < m.GetUpperBound(0) + 1; i++)
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    matrix[i, j] *= K;
+                    m[i, j] *= K;
                 }
             }
 
-            return matrix;
+            return m;
         }
 
-        // Отрисовка проекции XY
-        public static void DrawXY(Graphics g, Pen pen,  double[,] matrix)
+        // Отрисовка 2D изображения
+        public static void DrawXY(Graphics g, Pen pen, double[,] matrix)
         {
             for (int i = 0; i < contiguityMatrix.GetUpperBound(0) + 1; i++)
             {
@@ -84,52 +85,25 @@ namespace lab23
             }
         }
 
-        // Отрисовка проекции Кавалье
-        public static void DrawCavalier(Graphics g)
-        {
-            double angle = Math.PI * 30 / 180.0;
-
-            // Матрица проекции
-            double[,] projT = {{1,0, 0,0 },
-                {0, 1, 0,0 },
-                {-(float)Math.Cos(angle),-(float)Math.Sin(angle), 0, 0 },
-                {0, 0, 0, 1 }};
-
-            double[,] newMatrixF = new double[18, 4];
-
-            // Перемножение матриц
-            for (int i = 0; i < 18; i++)
-            {
-                for (int j = 0; j < 4; j++)
-                {
-                    for (int k = 0; k < 4; k++)
-                    {
-                        newMatrixF[i, j] += displayCoordinatesF[i, k] * projT[k, j];
-                    }
-                }
-            }
-
-            DrawXY(g, new Pen(Color.Red, 2), newMatrixF);
-        }
-
         // Отрисовка связей для объема фигуры
-        public static void DrawConnection(Graphics g)
+        public static void DrawConnection(Graphics g, Pen pen, double[,] a, double[,] b)
         {
-            Pen pen = new Pen(Color.Black, 2);
 
-            for (int i = 0; i < displayCoordinatesF.GetUpperBound(0) + 1; i++)
+            for (int i = 0; i < a.GetUpperBound(0) + 1; i++)
             {
-                g.DrawLine(pen, (float)displayCoordinatesF[i, 0], (float)displayCoordinatesF[i, 1],
-                    (float)displayCoordinatesB[i, 0], (float)displayCoordinatesB[i, 1]);
+                g.DrawLine(pen, (float)a[i, 0], (float)a[i, 1],
+                    (float)b[i, 0], (float)b[i, 1]);
             }
         }
 
-        // Отрисовка корабля
-        public static void DrawBase(Graphics g)
+        // Отрисовка проекции
+        public static void Draw(Graphics g, Pen pen, double[,] ma, double[,] mb)
         {
-            DrawXY(g, new Pen(Color.Black, 2), displayCoordinatesF);
-            DrawXY(g, new Pen(Color.Black, 2), displayCoordinatesB);
-            DrawConnection(g);
+            var a = GetDisplayCoordinates(ma);
+            var b = GetDisplayCoordinates(mb);
+            DrawXY(g, pen, a);
+            DrawXY(g, pen, b);
+            DrawConnection(g, pen, a, b);
         }
 
         // Поворот корабля относительно OX
@@ -154,18 +128,16 @@ namespace lab23
                 {
                     for (int k = 0; k < 4; k++)
                     {
-                        newMatrixF[i, j] += displayCoordinatesF[i, k] * rotateT[k, j];
-                        newMatrixB[i, j] += displayCoordinatesB[i, k] * rotateT[k, j];
+                        newMatrixF[i, j] += coordinateMatrixF[i, k] * rotateT[k, j];
+                        newMatrixB[i, j] += coordinateMatrixB[i, k] * rotateT[k, j];
                     }
                 }
             }
 
-            displayCoordinatesF = newMatrixF.Clone() as double[,];
-            displayCoordinatesB = newMatrixB.Clone() as double[,];
+            coordinateMatrixF = newMatrixF.Clone() as double[,];
+            coordinateMatrixB = newMatrixB.Clone() as double[,];
 
-            DrawXY(g, new Pen(Color.Black, 2), displayCoordinatesF);
-            DrawXY(g, new Pen(Color.Black, 2), displayCoordinatesB);
-            DrawConnection(g);
+            Draw(g, new Pen(Color.Black, 2), coordinateMatrixF, coordinateMatrixB);
         }
 
         // Поворот корабля относительно OY
@@ -190,18 +162,16 @@ namespace lab23
                 {
                     for (int k = 0; k < 4; k++)
                     {
-                        newMatrixF[i, j] += displayCoordinatesF[i, k] * rotateT[k, j];
-                        newMatrixB[i, j] += displayCoordinatesB[i, k] * rotateT[k, j];
+                        newMatrixF[i, j] += coordinateMatrixF[i, k] * rotateT[k, j];
+                        newMatrixB[i, j] += coordinateMatrixB[i, k] * rotateT[k, j];
                     }
                 }
             }
 
-            displayCoordinatesF = newMatrixF.Clone() as double[,];
-            displayCoordinatesB = newMatrixB.Clone() as double[,];
+            coordinateMatrixF = newMatrixF.Clone() as double[,];
+            coordinateMatrixB = newMatrixB.Clone() as double[,];
 
-            DrawXY(g, new Pen(Color.Black, 2), displayCoordinatesF);
-            DrawXY(g, new Pen(Color.Black, 2), displayCoordinatesB);
-            DrawConnection(g);
+            Draw(g, new Pen(Color.Black, 2), coordinateMatrixF, coordinateMatrixB);
         }
 
         // Поворот корабля относительно OY
@@ -226,18 +196,16 @@ namespace lab23
                 {
                     for (int k = 0; k < 4; k++)
                     {
-                        newMatrixF[i, j] += displayCoordinatesF[i, k] * rotateT[k, j];
-                        newMatrixB[i, j] += displayCoordinatesB[i, k] * rotateT[k, j];
+                        newMatrixF[i, j] += coordinateMatrixF[i, k] * rotateT[k, j];
+                        newMatrixB[i, j] += coordinateMatrixB[i, k] * rotateT[k, j];
                     }
                 }
             }
 
-            displayCoordinatesF = newMatrixF.Clone() as double[,];
-            displayCoordinatesB = newMatrixB.Clone() as double[,];
+            coordinateMatrixF = newMatrixF.Clone() as double[,];
+            coordinateMatrixB = newMatrixB.Clone() as double[,];
 
-            DrawXY(g, new Pen(Color.Black, 2), displayCoordinatesF);
-            DrawXY(g, new Pen(Color.Black, 2), displayCoordinatesB);
-            DrawConnection(g);
+            Draw(g, new Pen(Color.Black, 2), coordinateMatrixF, coordinateMatrixB);
         }
 
 
@@ -261,18 +229,16 @@ namespace lab23
                 {
                     for (int k = 0; k < 4; k++)
                     {
-                        newMatrixF[i, j] += displayCoordinatesF[i, k] * scaleT[k, j];
-                        newMatrixB[i, j] += displayCoordinatesB[i, k] * scaleT[k, j];
+                        newMatrixF[i, j] += coordinateMatrixF[i, k] * scaleT[k, j];
+                        newMatrixB[i, j] += coordinateMatrixB[i, k] * scaleT[k, j];
                     }
                 }
             }
 
-            displayCoordinatesF = newMatrixF.Clone() as double[,];
-            displayCoordinatesB = newMatrixB.Clone() as double[,];
+            coordinateMatrixF = newMatrixF.Clone() as double[,];
+            coordinateMatrixB = newMatrixB.Clone() as double[,];
 
-            DrawXY(g, new Pen(Color.Black, 2), displayCoordinatesF);
-            DrawXY(g, new Pen(Color.Black, 2), displayCoordinatesB);
-            DrawConnection(g);
+            Draw(g, new Pen(Color.Black, 2), coordinateMatrixF, coordinateMatrixB);
         }
 
         // Перемещение корабля
@@ -294,18 +260,46 @@ namespace lab23
                 {
                     for (int k = 0; k < 4; k++)
                     {
-                        newMatrixF[i, j] += displayCoordinatesF[i, k] * moveT[k, j];
-                        newMatrixB[i, j] += displayCoordinatesB[i, k] * moveT[k, j];
+                        newMatrixF[i, j] += coordinateMatrixF[i, k] * moveT[k, j];
+                        newMatrixB[i, j] += coordinateMatrixB[i, k] * moveT[k, j];
                     }
                 }
             }
 
-            displayCoordinatesF = newMatrixF.Clone() as double[,];
-            displayCoordinatesB = newMatrixB.Clone() as double[,];
+            coordinateMatrixF = newMatrixF.Clone() as double[,];
+            coordinateMatrixB = newMatrixB.Clone() as double[,];
 
-            DrawXY(g, new Pen(Color.Black, 2), displayCoordinatesF);
-            DrawXY(g, new Pen(Color.Black, 2), displayCoordinatesB);
-            DrawConnection(g);
+            Draw(g, new Pen(Color.Black, 2), coordinateMatrixF, coordinateMatrixB);
+        }
+
+        // Отрисовка проекции Кавалье
+        public static void DrawCavalier(Graphics g)
+        {
+            double angle = Math.PI * 30 / 180.0;
+
+            // Матрица проекции
+            double[,] projT = {{1,0, 0,0 },
+                {0, 1, 0,0 },
+                {-(float)Math.Cos(angle),-(float)Math.Sin(angle), 0, 0 },
+                {0, 0, 0, 1 }};
+
+            double[,] newMatrixF = new double[18, 4];
+            double[,] newMatrixB = new double[18, 4];
+
+            // Перемножение матриц
+            for (int i = 0; i < 18; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    for (int k = 0; k < 4; k++)
+                    {
+                        newMatrixF[i, j] += coordinateMatrixF[i, k] * projT[k, j];
+                        newMatrixB[i, j] += coordinateMatrixB[i, k] * projT[k, j];
+                    }
+                }
+            }
+
+            Draw(g, new Pen(Color.Red, 2), newMatrixF, newMatrixB);
         }
     }
 }

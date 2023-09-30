@@ -39,7 +39,7 @@ namespace lab23
 
         private void DrawBaseC_Click(object sender, EventArgs e)
         {
-            Ship.DrawBase(g);
+            Ship.Draw(g, new Pen(Color.Black, 2), Ship.coordinateMatrixF, Ship.coordinateMatrixB);
         }
 
         private void RotateX_Click(object sender, EventArgs e)
