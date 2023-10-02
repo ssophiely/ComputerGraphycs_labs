@@ -3,9 +3,9 @@ d:\Users\admin\Desktop\ПГУ\3 курс\Компьютерная графика
 d:\Users\admin\Desktop\ПГУ\3 курс\Компьютерная графика\ComputerGraphycs_labs\lab4\bin\Debug\lab4.pdb
 d:\Users\admin\Desktop\ПГУ\3 курс\Компьютерная графика\ComputerGraphycs_labs\lab4\obj\Debug\lab4.csproj.AssemblyReference.cache
 d:\Users\admin\Desktop\ПГУ\3 курс\Компьютерная графика\ComputerGraphycs_labs\lab4\obj\Debug\lab4.csproj.SuggestedBindingRedirects.cache
-d:\Users\admin\Desktop\ПГУ\3 курс\Компьютерная графика\ComputerGraphycs_labs\lab4\obj\Debug\lab23.Form1.resources
 d:\Users\admin\Desktop\ПГУ\3 курс\Компьютерная графика\ComputerGraphycs_labs\lab4\obj\Debug\lab4.Properties.Resources.resources
 d:\Users\admin\Desktop\ПГУ\3 курс\Компьютерная графика\ComputerGraphycs_labs\lab4\obj\Debug\lab4.csproj.GenerateResource.cache
 d:\Users\admin\Desktop\ПГУ\3 курс\Компьютерная графика\ComputerGraphycs_labs\lab4\obj\Debug\lab4.csproj.CoreCompileInputs.cache
 d:\Users\admin\Desktop\ПГУ\3 курс\Компьютерная графика\ComputerGraphycs_labs\lab4\obj\Debug\lab4.exe
 d:\Users\admin\Desktop\ПГУ\3 курс\Компьютерная графика\ComputerGraphycs_labs\lab4\obj\Debug\lab4.pdb
+d:\Users\admin\Desktop\ПГУ\3 курс\Компьютерная графика\ComputerGraphycs_labs\lab4\obj\Debug\lab4.Form1.resources

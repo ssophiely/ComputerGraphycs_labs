@@ -1,4 +1,4 @@
-﻿namespace lab23
+﻿namespace lab4
 {
     partial class Form1
     {
@@ -52,6 +52,7 @@
             this.RotateZ = new System.Windows.Forms.Button();
             this.Projection = new System.Windows.Forms.Button();
             this.Reset = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.rx)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scx)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scy)).BeginInit();
@@ -318,11 +319,22 @@
             this.Reset.UseVisualStyleBackColor = true;
             this.Reset.Click += new System.EventHandler(this.Reset_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(20, 138);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 24;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1255, 692);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.Reset);
             this.Controls.Add(this.Projection);
             this.Controls.Add(this.rz);
@@ -392,6 +404,7 @@
         private System.Windows.Forms.Button RotateZ;
         private System.Windows.Forms.Button Projection;
         private System.Windows.Forms.Button Reset;
+        private System.Windows.Forms.Button button1;
     }
 }
 

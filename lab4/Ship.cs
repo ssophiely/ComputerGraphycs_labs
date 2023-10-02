@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace lab23
+namespace lab4
 {
     public static class Ship
     {

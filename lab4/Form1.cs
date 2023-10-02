@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace lab23
+namespace lab4
 {
     public partial class Form1 : Form
     {
@@ -90,6 +90,11 @@ namespace lab23
         {
             g.Clear(Color.White);
             Ship.Reset();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Cleaner.CreateMatrix();
         }
     }
 }
