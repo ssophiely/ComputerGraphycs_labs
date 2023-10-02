@@ -38,13 +38,13 @@ namespace lab4
         {
             // Все плоскости фигуры
             // Передняя грань
-            var A1 = -FindA(Ship.coordinateMatrixF[0, 1], Ship.coordinateMatrixF[1, 1], Ship.coordinateMatrixF[13, 1],
+            var A1 = FindA(Ship.coordinateMatrixF[0, 1], Ship.coordinateMatrixF[1, 1], Ship.coordinateMatrixF[13, 1],
                 Ship.coordinateMatrixF[0, 2], Ship.coordinateMatrixF[1, 2], Ship.coordinateMatrixF[13, 2]);
-            var B1 = FindB(Ship.coordinateMatrixF[0, 0], Ship.coordinateMatrixF[1, 0], Ship.coordinateMatrixF[13, 0],
+            var B1 = -FindB(Ship.coordinateMatrixF[0, 0], Ship.coordinateMatrixF[1, 0], Ship.coordinateMatrixF[13, 0],
                 Ship.coordinateMatrixF[0, 2], Ship.coordinateMatrixF[1, 2], Ship.coordinateMatrixF[13, 2]);
-            var C1 = -FindC(Ship.coordinateMatrixF[0, 0], Ship.coordinateMatrixF[1, 0], Ship.coordinateMatrixF[13, 0],
+            var C1 = FindC(Ship.coordinateMatrixF[0, 0], Ship.coordinateMatrixF[1, 0], Ship.coordinateMatrixF[13, 0],
                 Ship.coordinateMatrixF[0, 1], Ship.coordinateMatrixF[1, 1], Ship.coordinateMatrixF[13, 1]);
-            var D1 = FindD(Ship.coordinateMatrixF[0, 0], Ship.coordinateMatrixF[1, 0], Ship.coordinateMatrixF[13, 0],
+            var D1 = -FindD(Ship.coordinateMatrixF[0, 0], Ship.coordinateMatrixF[1, 0], Ship.coordinateMatrixF[13, 0],
                 Ship.coordinateMatrixF[0, 1], Ship.coordinateMatrixF[1, 1], Ship.coordinateMatrixF[13, 1],
                 Ship.coordinateMatrixF[0, 2], Ship.coordinateMatrixF[1, 2], Ship.coordinateMatrixF[13, 2]);
 
@@ -82,24 +82,24 @@ namespace lab4
                 Ship.coordinateMatrixF[2, 2], Ship.coordinateMatrixF[5, 2], Ship.coordinateMatrixB[5, 2]);
 
             // Правая грань судна
-            var A5 = -FindA(Ship.coordinateMatrixF[1, 1], Ship.coordinateMatrixF[4, 1], Ship.coordinateMatrixB[4, 1],
+            var A5 = FindA(Ship.coordinateMatrixF[1, 1], Ship.coordinateMatrixF[4, 1], Ship.coordinateMatrixB[4, 1],
                 Ship.coordinateMatrixF[1, 2], Ship.coordinateMatrixF[4, 2], Ship.coordinateMatrixB[4, 2]);
-            var B5 = FindB(Ship.coordinateMatrixF[1, 0], Ship.coordinateMatrixF[4, 0], Ship.coordinateMatrixB[4, 0],
+            var B5 = -FindB(Ship.coordinateMatrixF[1, 0], Ship.coordinateMatrixF[4, 0], Ship.coordinateMatrixB[4, 0],
                 Ship.coordinateMatrixF[1, 2], Ship.coordinateMatrixF[4, 2], Ship.coordinateMatrixB[4, 2]);
-            var C5 = -FindC(Ship.coordinateMatrixF[1, 0], Ship.coordinateMatrixF[4, 0], Ship.coordinateMatrixB[4, 0],
+            var C5 = FindC(Ship.coordinateMatrixF[1, 0], Ship.coordinateMatrixF[4, 0], Ship.coordinateMatrixB[4, 0],
                 Ship.coordinateMatrixF[1, 1], Ship.coordinateMatrixF[4, 1], Ship.coordinateMatrixB[4, 1]);
-            var D5 = FindD(Ship.coordinateMatrixF[1, 0], Ship.coordinateMatrixF[4, 0], Ship.coordinateMatrixB[4, 0],
+            var D5 = -FindD(Ship.coordinateMatrixF[1, 0], Ship.coordinateMatrixF[4, 0], Ship.coordinateMatrixB[4, 0],
                 Ship.coordinateMatrixF[1, 1], Ship.coordinateMatrixF[4, 1], Ship.coordinateMatrixB[4, 1],
                 Ship.coordinateMatrixF[1, 2], Ship.coordinateMatrixF[4, 2], Ship.coordinateMatrixB[4, 2]);
 
             // Дно судна
-            var A6 = -FindA(Ship.coordinateMatrixF[2, 1], Ship.coordinateMatrixF[1, 1], Ship.coordinateMatrixB[1, 1],
+            var A6 = FindA(Ship.coordinateMatrixF[2, 1], Ship.coordinateMatrixF[1, 1], Ship.coordinateMatrixB[1, 1],
                 Ship.coordinateMatrixF[2, 2], Ship.coordinateMatrixF[1, 2], Ship.coordinateMatrixB[1, 2]);
-            var B6 = FindB(Ship.coordinateMatrixF[2, 0], Ship.coordinateMatrixF[1, 0], Ship.coordinateMatrixB[1, 0],
+            var B6 = -FindB(Ship.coordinateMatrixF[2, 0], Ship.coordinateMatrixF[1, 0], Ship.coordinateMatrixB[1, 0],
                 Ship.coordinateMatrixF[2, 2], Ship.coordinateMatrixF[1, 2], Ship.coordinateMatrixB[1, 2]);
-            var C6 = -FindC(Ship.coordinateMatrixF[2, 0], Ship.coordinateMatrixF[1, 0], Ship.coordinateMatrixB[1, 0],
+            var C6 = FindC(Ship.coordinateMatrixF[2, 0], Ship.coordinateMatrixF[1, 0], Ship.coordinateMatrixB[1, 0],
                 Ship.coordinateMatrixF[2, 1], Ship.coordinateMatrixF[1, 1], Ship.coordinateMatrixB[1, 1]);
-            var D6 = FindD(Ship.coordinateMatrixF[2, 0], Ship.coordinateMatrixF[1, 0], Ship.coordinateMatrixB[1, 0],
+            var D6 = -FindD(Ship.coordinateMatrixF[2, 0], Ship.coordinateMatrixF[1, 0], Ship.coordinateMatrixB[1, 0],
                 Ship.coordinateMatrixF[2, 1], Ship.coordinateMatrixF[1, 1], Ship.coordinateMatrixB[1, 1],
                 Ship.coordinateMatrixF[2, 2], Ship.coordinateMatrixF[1, 2], Ship.coordinateMatrixB[1, 2]);
 
@@ -115,24 +115,24 @@ namespace lab4
                 Ship.coordinateMatrixF[14, 2], Ship.coordinateMatrixF[15, 2], Ship.coordinateMatrixB[15, 2]);
 
             // Верх левого паруса
-            var A8 = -FindA(Ship.coordinateMatrixF[13, 1], Ship.coordinateMatrixF[15, 1], Ship.coordinateMatrixB[15, 1],
+            var A8 = FindA(Ship.coordinateMatrixF[13, 1], Ship.coordinateMatrixF[15, 1], Ship.coordinateMatrixB[15, 1],
                  Ship.coordinateMatrixF[13, 2], Ship.coordinateMatrixF[15, 2], Ship.coordinateMatrixB[15, 2]);
-            var B8 = FindB(Ship.coordinateMatrixF[13, 0], Ship.coordinateMatrixF[15, 0], Ship.coordinateMatrixB[15, 0],
+            var B8 = -FindB(Ship.coordinateMatrixF[13, 0], Ship.coordinateMatrixF[15, 0], Ship.coordinateMatrixB[15, 0],
                 Ship.coordinateMatrixF[13, 2], Ship.coordinateMatrixF[15, 2], Ship.coordinateMatrixB[15, 2]);
-            var C8 = -FindC(Ship.coordinateMatrixF[13, 0], Ship.coordinateMatrixF[15, 0], Ship.coordinateMatrixB[15, 0],
+            var C8 = FindC(Ship.coordinateMatrixF[13, 0], Ship.coordinateMatrixF[15, 0], Ship.coordinateMatrixB[15, 0],
                 Ship.coordinateMatrixF[13, 1], Ship.coordinateMatrixF[15, 1], Ship.coordinateMatrixB[15, 1]);
-            var D8 = FindD(Ship.coordinateMatrixF[13, 0], Ship.coordinateMatrixF[15, 0], Ship.coordinateMatrixB[15, 0],
+            var D8 = -FindD(Ship.coordinateMatrixF[13, 0], Ship.coordinateMatrixF[15, 0], Ship.coordinateMatrixB[15, 0],
                 Ship.coordinateMatrixF[13, 1], Ship.coordinateMatrixF[15, 1], Ship.coordinateMatrixB[15, 1],
                 Ship.coordinateMatrixF[13, 2], Ship.coordinateMatrixF[15, 2], Ship.coordinateMatrixB[15, 2]);
 
             // Низ правого паруса
-            var A9 = -FindA(Ship.coordinateMatrixF[11, 1], Ship.coordinateMatrixF[12, 1], Ship.coordinateMatrixB[12, 1],
+            var A9 = FindA(Ship.coordinateMatrixF[11, 1], Ship.coordinateMatrixF[12, 1], Ship.coordinateMatrixB[12, 1],
                 Ship.coordinateMatrixF[11, 2], Ship.coordinateMatrixF[12, 2], Ship.coordinateMatrixB[12, 2]);
-            var B9 = FindB(Ship.coordinateMatrixF[11, 0], Ship.coordinateMatrixF[12, 0], Ship.coordinateMatrixB[12, 0],
+            var B9 = -FindB(Ship.coordinateMatrixF[11, 0], Ship.coordinateMatrixF[12, 0], Ship.coordinateMatrixB[12, 0],
                 Ship.coordinateMatrixF[11, 2], Ship.coordinateMatrixF[12, 2], Ship.coordinateMatrixB[12, 2]);
-            var C9 = -FindC(Ship.coordinateMatrixF[11, 0], Ship.coordinateMatrixF[12, 0], Ship.coordinateMatrixB[12, 0],
+            var C9 = FindC(Ship.coordinateMatrixF[11, 0], Ship.coordinateMatrixF[12, 0], Ship.coordinateMatrixB[12, 0],
                 Ship.coordinateMatrixF[11, 1], Ship.coordinateMatrixF[12, 1], Ship.coordinateMatrixB[12, 1]);
-            var D9 = FindD(Ship.coordinateMatrixF[11, 0], Ship.coordinateMatrixF[12, 0], Ship.coordinateMatrixB[12, 0],
+            var D9 = -FindD(Ship.coordinateMatrixF[11, 0], Ship.coordinateMatrixF[12, 0], Ship.coordinateMatrixB[12, 0],
                 Ship.coordinateMatrixF[11, 1], Ship.coordinateMatrixF[12, 1], Ship.coordinateMatrixB[12, 1],
                 Ship.coordinateMatrixF[11, 2], Ship.coordinateMatrixF[12, 2], Ship.coordinateMatrixB[12, 2]);
 
@@ -148,24 +148,24 @@ namespace lab4
                 Ship.coordinateMatrixF[10, 2], Ship.coordinateMatrixF[12, 2], Ship.coordinateMatrixB[12, 2]);
 
             // Верх флага
-            var A11 = -FindA(Ship.coordinateMatrixF[9, 1], Ship.coordinateMatrixF[17, 1], Ship.coordinateMatrixB[17, 1],
+            var A11 = FindA(Ship.coordinateMatrixF[9, 1], Ship.coordinateMatrixF[17, 1], Ship.coordinateMatrixB[17, 1],
                 Ship.coordinateMatrixF[9, 2], Ship.coordinateMatrixF[17, 2], Ship.coordinateMatrixB[17, 2]);
-            var B11 = FindB(Ship.coordinateMatrixF[9, 0], Ship.coordinateMatrixF[17, 0], Ship.coordinateMatrixB[17, 0],
+            var B11 = -FindB(Ship.coordinateMatrixF[9, 0], Ship.coordinateMatrixF[17, 0], Ship.coordinateMatrixB[17, 0],
                 Ship.coordinateMatrixF[9, 2], Ship.coordinateMatrixF[17, 2], Ship.coordinateMatrixB[17, 2]);
-            var C11 = -FindC(Ship.coordinateMatrixF[9, 0], Ship.coordinateMatrixF[17, 0], Ship.coordinateMatrixB[17, 0],
+            var C11 = FindC(Ship.coordinateMatrixF[9, 0], Ship.coordinateMatrixF[17, 0], Ship.coordinateMatrixB[17, 0],
                 Ship.coordinateMatrixF[9, 1], Ship.coordinateMatrixF[17, 1], Ship.coordinateMatrixB[17, 1]);
-            var D11 = FindD(Ship.coordinateMatrixF[9, 0], Ship.coordinateMatrixF[17, 0], Ship.coordinateMatrixB[17, 0],
+            var D11 = -FindD(Ship.coordinateMatrixF[9, 0], Ship.coordinateMatrixF[17, 0], Ship.coordinateMatrixB[17, 0],
                 Ship.coordinateMatrixF[9, 1], Ship.coordinateMatrixF[17, 1], Ship.coordinateMatrixB[17, 1],
                 Ship.coordinateMatrixF[9, 2], Ship.coordinateMatrixF[17, 2], Ship.coordinateMatrixB[17, 2]);
 
             // Низ флага
-            var A12 = -FindA(Ship.coordinateMatrixF[16, 1], Ship.coordinateMatrixF[17, 1], Ship.coordinateMatrixB[17, 1],
+            var A12 = FindA(Ship.coordinateMatrixF[16, 1], Ship.coordinateMatrixF[17, 1], Ship.coordinateMatrixB[17, 1],
                 Ship.coordinateMatrixF[16, 2], Ship.coordinateMatrixF[17, 2], Ship.coordinateMatrixB[17, 2]);
-            var B12 = FindB(Ship.coordinateMatrixF[16, 0], Ship.coordinateMatrixF[17, 0], Ship.coordinateMatrixB[17, 0],
+            var B12 = -FindB(Ship.coordinateMatrixF[16, 0], Ship.coordinateMatrixF[17, 0], Ship.coordinateMatrixB[17, 0],
                 Ship.coordinateMatrixF[16, 2], Ship.coordinateMatrixF[17, 2], Ship.coordinateMatrixB[17, 2]);
-            var C12 = -FindC(Ship.coordinateMatrixF[16, 0], Ship.coordinateMatrixF[17, 0], Ship.coordinateMatrixB[17, 0],
+            var C12 = FindC(Ship.coordinateMatrixF[16, 0], Ship.coordinateMatrixF[17, 0], Ship.coordinateMatrixB[17, 0],
                 Ship.coordinateMatrixF[16, 1], Ship.coordinateMatrixF[17, 1], Ship.coordinateMatrixB[17, 1]);
-            var D12 = FindD(Ship.coordinateMatrixF[16, 0], Ship.coordinateMatrixF[17, 0], Ship.coordinateMatrixB[17, 0],
+            var D12 = -FindD(Ship.coordinateMatrixF[16, 0], Ship.coordinateMatrixF[17, 0], Ship.coordinateMatrixB[17, 0],
                 Ship.coordinateMatrixF[16, 1], Ship.coordinateMatrixF[17, 1], Ship.coordinateMatrixB[17, 1],
                 Ship.coordinateMatrixF[16, 2], Ship.coordinateMatrixF[17, 2], Ship.coordinateMatrixB[17, 2]);
 
@@ -181,35 +181,35 @@ namespace lab4
                 Ship.coordinateMatrixF[9, 2], Ship.coordinateMatrixF[6, 2], Ship.coordinateMatrixB[6, 2]);
 
             // Верхняя правая часть мачты
-            var A14 = -FindA(Ship.coordinateMatrixF[10, 1], Ship.coordinateMatrixF[6, 1], Ship.coordinateMatrixB[6, 1],
+            var A14 = FindA(Ship.coordinateMatrixF[10, 1], Ship.coordinateMatrixF[6, 1], Ship.coordinateMatrixB[6, 1],
                 Ship.coordinateMatrixF[10, 2], Ship.coordinateMatrixF[6, 2], Ship.coordinateMatrixB[6, 2]);
-            var B14 = FindB(Ship.coordinateMatrixF[10, 0], Ship.coordinateMatrixF[6, 0], Ship.coordinateMatrixB[6, 0],
+            var B14 = -FindB(Ship.coordinateMatrixF[10, 0], Ship.coordinateMatrixF[6, 0], Ship.coordinateMatrixB[6, 0],
                 Ship.coordinateMatrixF[10, 2], Ship.coordinateMatrixF[6, 2], Ship.coordinateMatrixB[6, 2]);
-            var C14 = -FindC(Ship.coordinateMatrixF[10, 0], Ship.coordinateMatrixF[6, 0], Ship.coordinateMatrixB[6, 0],
+            var C14 = FindC(Ship.coordinateMatrixF[10, 0], Ship.coordinateMatrixF[6, 0], Ship.coordinateMatrixB[6, 0],
                 Ship.coordinateMatrixF[10, 1], Ship.coordinateMatrixF[6, 1], Ship.coordinateMatrixB[6, 1]);
-            var D14 = FindD(Ship.coordinateMatrixF[10, 0], Ship.coordinateMatrixF[6, 0], Ship.coordinateMatrixB[6, 0],
+            var D14 = -FindD(Ship.coordinateMatrixF[10, 0], Ship.coordinateMatrixF[6, 0], Ship.coordinateMatrixB[6, 0],
                 Ship.coordinateMatrixF[10, 1], Ship.coordinateMatrixF[6, 1], Ship.coordinateMatrixB[6, 1],
                 Ship.coordinateMatrixF[10, 2], Ship.coordinateMatrixF[6, 2], Ship.coordinateMatrixB[6, 2]);
 
             // Верхняя левая часть мачты
-            var A15 = -FindA(Ship.coordinateMatrixF[13, 1], Ship.coordinateMatrixF[15, 1], Ship.coordinateMatrixB[15, 1],
+            var A15 = FindA(Ship.coordinateMatrixF[13, 1], Ship.coordinateMatrixF[15, 1], Ship.coordinateMatrixB[15, 1],
                 Ship.coordinateMatrixF[13, 2], Ship.coordinateMatrixF[15, 2], Ship.coordinateMatrixB[15, 2]);
-            var B15 = FindB(Ship.coordinateMatrixF[13, 0], Ship.coordinateMatrixF[15, 0], Ship.coordinateMatrixB[15, 0],
+            var B15 = -FindB(Ship.coordinateMatrixF[13, 0], Ship.coordinateMatrixF[15, 0], Ship.coordinateMatrixB[15, 0],
                 Ship.coordinateMatrixF[13, 2], Ship.coordinateMatrixF[15, 2], Ship.coordinateMatrixB[15, 2]);
-            var C15 = -FindC(Ship.coordinateMatrixF[13, 0], Ship.coordinateMatrixF[15, 0], Ship.coordinateMatrixB[15, 0],
+            var C15 = FindC(Ship.coordinateMatrixF[13, 0], Ship.coordinateMatrixF[15, 0], Ship.coordinateMatrixB[15, 0],
                 Ship.coordinateMatrixF[13, 1], Ship.coordinateMatrixF[15, 1], Ship.coordinateMatrixB[15, 1]);
-            var D15 = FindD(Ship.coordinateMatrixF[13, 0], Ship.coordinateMatrixF[17, 0], Ship.coordinateMatrixB[17, 0],
+            var D15 = -FindD(Ship.coordinateMatrixF[13, 0], Ship.coordinateMatrixF[17, 0], Ship.coordinateMatrixB[17, 0],
                 Ship.coordinateMatrixF[13, 1], Ship.coordinateMatrixF[15, 1], Ship.coordinateMatrixB[15, 1],
                 Ship.coordinateMatrixF[13, 2], Ship.coordinateMatrixF[15, 2], Ship.coordinateMatrixB[15, 2]);
 
             // Нижняя левая часть мачты
-            var A16 = -FindA(Ship.coordinateMatrixF[14, 1], Ship.coordinateMatrixF[8, 1], Ship.coordinateMatrixB[8, 1],
+            var A16 = FindA(Ship.coordinateMatrixF[14, 1], Ship.coordinateMatrixF[8, 1], Ship.coordinateMatrixB[8, 1],
                 Ship.coordinateMatrixF[14, 2], Ship.coordinateMatrixF[8, 2], Ship.coordinateMatrixB[8, 2]);
-            var B16 = FindB(Ship.coordinateMatrixF[14, 0], Ship.coordinateMatrixF[8, 0], Ship.coordinateMatrixB[8, 0],
+            var B16 = -FindB(Ship.coordinateMatrixF[14, 0], Ship.coordinateMatrixF[8, 0], Ship.coordinateMatrixB[8, 0],
                 Ship.coordinateMatrixF[14, 2], Ship.coordinateMatrixF[8, 2], Ship.coordinateMatrixB[8, 2]);
-            var C16 = -FindC(Ship.coordinateMatrixF[14, 0], Ship.coordinateMatrixF[8, 0], Ship.coordinateMatrixB[8, 0],
+            var C16 = FindC(Ship.coordinateMatrixF[14, 0], Ship.coordinateMatrixF[8, 0], Ship.coordinateMatrixB[8, 0],
                 Ship.coordinateMatrixF[14, 1], Ship.coordinateMatrixF[8, 1], Ship.coordinateMatrixB[8, 1]);
-            var D16 = FindD(Ship.coordinateMatrixF[14, 0], Ship.coordinateMatrixF[8, 0], Ship.coordinateMatrixB[8, 0],
+            var D16 = -FindD(Ship.coordinateMatrixF[14, 0], Ship.coordinateMatrixF[8, 0], Ship.coordinateMatrixB[8, 0],
                 Ship.coordinateMatrixF[14, 1], Ship.coordinateMatrixF[8, 1], Ship.coordinateMatrixB[8, 1],
                 Ship.coordinateMatrixF[14, 2], Ship.coordinateMatrixF[8, 2], Ship.coordinateMatrixB[8, 2]);
 
@@ -224,13 +224,20 @@ namespace lab4
                 Ship.coordinateMatrixF[11, 1], Ship.coordinateMatrixF[7, 1], Ship.coordinateMatrixB[7, 1],
                 Ship.coordinateMatrixF[11, 2], Ship.coordinateMatrixF[7, 2], Ship.coordinateMatrixB[7, 2]);
 
-            double[] x = new double[] { 0, 0, 0, 1 };
-            double[] m = new double[] { A5, B5, C5, D5 };
-            double res = 0;
+            double[] x = new double[] { 0, 0, -50, 1 };
+            double[,] m = new double[,] { { A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17 },
+                { B1,B2,B3,B4,B5,B6,B7,B8,B9,B10,B11,B12,B13,B14,B15,B16,B17},
+                {C1,C2,C3,C4,C5,C6,C7,C8,C9,C10,C11,C12,C13,C14,C15,C16,C17 },
+                { D1,D2,D3,D4,D5,D6,D7,D8,D9,D10,D11,D12,D13,D14,D15,D16,D17} };
+            double[] result = new double[17];
+
             // Перемножение матриц
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 17; i++)
             {
-                res += x[i] * m[i];
+                for (int j = 0; j < 4; j++)
+                {
+                    result[i] += x[j] * m[j, i];
+                }
             }
         }
     }
