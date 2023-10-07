@@ -53,6 +53,7 @@
             this.Projection = new System.Windows.Forms.Button();
             this.Reset = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.pb = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.rx)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scx)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scy)).BeginInit();
@@ -62,6 +63,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.mx)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ry)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rz)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb)).BeginInit();
             this.SuspendLayout();
             // 
             // ClearAll
@@ -121,7 +123,7 @@
             this.rx.Size = new System.Drawing.Size(71, 22);
             this.rx.TabIndex = 5;
             this.rx.Value = new decimal(new int[] {
-            50,
+            10,
             0,
             0,
             0});
@@ -199,7 +201,7 @@
             this.mz.Size = new System.Drawing.Size(71, 22);
             this.mz.TabIndex = 17;
             this.mz.Value = new decimal(new int[] {
-            70,
+            15,
             0,
             0,
             0});
@@ -211,7 +213,7 @@
             this.my.Size = new System.Drawing.Size(71, 22);
             this.my.TabIndex = 16;
             this.my.Value = new decimal(new int[] {
-            60,
+            3,
             0,
             0,
             0});
@@ -223,7 +225,7 @@
             this.mx.Size = new System.Drawing.Size(71, 22);
             this.mx.TabIndex = 15;
             this.mx.Value = new decimal(new int[] {
-            50,
+            5,
             0,
             0,
             0});
@@ -262,7 +264,7 @@
             this.ry.Size = new System.Drawing.Size(71, 22);
             this.ry.TabIndex = 19;
             this.ry.Value = new decimal(new int[] {
-            20,
+            10,
             0,
             0,
             0});
@@ -284,7 +286,7 @@
             this.rz.Size = new System.Drawing.Size(71, 22);
             this.rz.TabIndex = 21;
             this.rz.Value = new decimal(new int[] {
-            70,
+            10,
             0,
             0,
             0});
@@ -329,11 +331,20 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // pb
+            // 
+            this.pb.Location = new System.Drawing.Point(12, 178);
+            this.pb.Name = "pb";
+            this.pb.Size = new System.Drawing.Size(1231, 502);
+            this.pb.TabIndex = 25;
+            this.pb.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1255, 692);
+            this.Controls.Add(this.pb);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.Reset);
             this.Controls.Add(this.Projection);
@@ -373,6 +384,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.mx)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ry)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rz)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -405,6 +417,7 @@
         private System.Windows.Forms.Button Projection;
         private System.Windows.Forms.Button Reset;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.PictureBox pb;
     }
 }
 

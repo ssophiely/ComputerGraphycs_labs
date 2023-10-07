@@ -4,13 +4,18 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace lab4
 {
     public static class Ship
     {
+        private const double xc = 1231 / 2;
+
+        private const double yc = 502 / 2;
+
         // коэффициент увеличения
-        public static int K = 12;
+        public static int K = 10;
 
         // экранные координаты передней части 
         public static double[,] coordinateMatrixF;
@@ -71,18 +76,26 @@ namespace lab4
             return m;
         }
 
+        private static void SetGraphics(Graphics g)
+        {
+            // Преобразование системы отсчета
+            g.TranslateTransform((float)xc, (float)yc);
+            g.ScaleTransform(1.0F, -1.0F);
+        }
+
         // Отрисовка 2D изображения
         public static void DrawXY(Graphics g, Pen pen, double[,] matrix)
         {
-            for (int i = 0; i < contiguityMatrix.GetUpperBound(0) + 1; i++)
-            {
-                for (int j = 0; j < contiguityMatrix.GetUpperBound(0) + 1; j++)
+
+                for (int i = 0; i < contiguityMatrix.GetUpperBound(0) + 1; i++)
                 {
-                    if (contiguityMatrix[i, j] == 1) // смотрим по матрице смежности
-                        g.DrawLine(pen, (float)matrix[i, 0], (float)matrix[i, 1],
-                            (float)matrix[j, 0], (float)matrix[j, 1]);
+                    for (int j = 0; j < contiguityMatrix.GetUpperBound(0) + 1; j++)
+                    {
+                        if (contiguityMatrix[i, j] == 1) // смотрим по матрице смежности
+                            g.DrawLine(pen, (float)matrix[i, 0], (float)matrix[i, 1],
+                                (float)matrix[j, 0], (float)matrix[j, 1]);
+                    }
                 }
-            }
         }
 
         // Отрисовка связей для объема фигуры
@@ -99,6 +112,7 @@ namespace lab4
         // Отрисовка проекции
         public static void Draw(Graphics g, Pen pen, double[,] ma, double[,] mb)
         {
+            SetGraphics(g);
             var a = GetDisplayCoordinates(ma);
             var b = GetDisplayCoordinates(mb);
             DrawXY(g, pen, a);
