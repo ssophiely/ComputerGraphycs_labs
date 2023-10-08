@@ -1,15 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TreeView;
 
 namespace lab4
 {
     // Удаление невидимых линий с помощью алгоритма Робертса
     internal class Cleaner
     {
+        private static int[,] buffe;
+
         // Находим коэфф-т A 
         public static double FindA(double y1, double y2, double y3, double z1, double z2, double z3)
         {
@@ -254,8 +260,69 @@ namespace lab4
             //}
         }
 
+        public static void DeleteLines(Bitmap main, Bitmap extra)
+        {
+            int w = extra.Width;
+            int h = extra.Height;
 
-        public static void ChangeLines(double[] m, int n, Graphics g, Pen pen)
+            // буфер заполнили минимальными значениями
+            int[,] buffer = new int[h, w];
+            for (int i = 0; i < h; i++)
+            {
+                for (int j = 0; j < w; j++)
+                {
+                    buffer[i, j] = Int32.MinValue;
+                }
+            }
+
+            Graphics eg = Graphics.FromImage(extra);
+            eg.TranslateTransform((float)w / 2, (float)h / 2);
+            eg.ScaleTransform(1.0F, -1.0F);
+            eg.Clear(Color.White);
+
+            Graphics mg = Graphics.FromImage(main);
+            mg.TranslateTransform((float)w / 2, (float)h / 2);
+            mg.ScaleTransform(1.0F, -1.0F);
+            mg.Clear(Color.White);
+
+            for (int i = 0; i < 17; i++)
+            {
+                DrawPlane(i, mg, eg, new Pen(Color.Black, 2));
+
+                // просматриваем грань 
+                for (int y = 0; y < h; y++)
+                {
+                    for (int x = 0; x < w; x++)
+                    {
+                        Color pix = extra.GetPixel(x, y);
+                        if (pix.R == 0 && pix.G == 0 && pix.B == 0)
+                        {
+                            buffer[y, x] = 1;
+                            int ind = x + 1;
+                            for (int k = x + 1; k < w; k++)
+                            {
+                                Color px = extra.GetPixel(k, y);
+                                if (px.R == 0 && px.G == 0 && px.B == 0)
+                                {
+                                    buffer[y, k] = 1;
+                                    ind = k;
+                                }
+                            }
+                            for (int k = x + 1; k < ind; k++)
+                            {
+                                buffer[y, k] = 1;
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+
+
+        }
+
+        // Отрисовка всех поверхностей корабля
+        public static void DrawPlane(int n, Graphics g, Graphics ex, Pen pen)
         {
             var a = Ship.GetDisplayCoordinates(Ship.coordinateMatrixF);
             var b = Ship.GetDisplayCoordinates(Ship.coordinateMatrixB);
@@ -271,6 +338,8 @@ namespace lab4
                             {
                                 g.DrawLine(pen, (float)a[i, 0], (float)a[i, 1],
                                     (float)a[j, 0], (float)a[j, 1]);
+                                ex.DrawLine(pen, (float)a[i, 0], (float)a[i, 1],
+                                    (float)a[j, 0], (float)a[j, 1]);
                             }
                         }
                     }
@@ -283,6 +352,8 @@ namespace lab4
                             if (Ship.contiguityMatrix[i, j] == 1)  // смотрим по матрице смежности
                             {
                                 g.DrawLine(pen, (float)b[i, 0], (float)b[i, 1],
+                                    (float)b[j, 0], (float)b[j, 1]);
+                                ex.DrawLine(pen, (float)b[i, 0], (float)b[i, 1],
                                     (float)b[j, 0], (float)b[j, 1]);
                             }
                         }
@@ -297,90 +368,169 @@ namespace lab4
                     g.DrawLine(pen, (float)a[0, 0], (float)a[0, 1], (float)b[0, 0], (float)b[0, 1]);
                     g.DrawLine(pen, (float)a[7, 0], (float)a[7, 1], (float)b[7, 0], (float)b[7, 1]);
                     g.DrawLine(pen, (float)a[7, 0], (float)a[7, 1], (float)b[7, 0], (float)b[7, 1]);
+
+                    ex.DrawLine(pen, (float)a[5, 0], (float)a[5, 1], (float)a[4, 0], (float)a[4, 1]);
+                    ex.DrawLine(pen, (float)b[5, 0], (float)b[5, 1], (float)b[4, 0], (float)b[4, 1]);
+                    ex.DrawLine(pen, (float)a[5, 0], (float)a[5, 1], (float)b[5, 0], (float)b[5, 1]);
+                    ex.DrawLine(pen, (float)a[4, 0], (float)a[4, 1], (float)b[4, 0], (float)b[4, 1]);
+                    ex.DrawLine(pen, (float)a[3, 0], (float)a[3, 1], (float)b[3, 0], (float)b[3, 1]);
+                    ex.DrawLine(pen, (float)a[0, 0], (float)a[0, 1], (float)b[0, 0], (float)b[0, 1]);
+                    ex.DrawLine(pen, (float)a[7, 0], (float)a[7, 1], (float)b[7, 0], (float)b[7, 1]);
+                    ex.DrawLine(pen, (float)a[7, 0], (float)a[7, 1], (float)b[7, 0], (float)b[7, 1]);
                     break;
                 case 3:
                     g.DrawLine(pen, (float)a[2, 0], (float)a[2, 1], (float)a[5, 0], (float)a[5, 1]);
                     g.DrawLine(pen, (float)b[2, 0], (float)b[2, 1], (float)b[5, 0], (float)b[5, 1]);
                     g.DrawLine(pen, (float)a[5, 0], (float)a[5, 1], (float)b[5, 0], (float)b[5, 1]);
                     g.DrawLine(pen, (float)a[2, 0], (float)a[2, 1], (float)b[2, 0], (float)b[2, 1]);
+
+                    ex.DrawLine(pen, (float)a[2, 0], (float)a[2, 1], (float)a[5, 0], (float)a[5, 1]);
+                    ex.DrawLine(pen, (float)b[2, 0], (float)b[2, 1], (float)b[5, 0], (float)b[5, 1]);
+                    ex.DrawLine(pen, (float)a[5, 0], (float)a[5, 1], (float)b[5, 0], (float)b[5, 1]);
+                    ex.DrawLine(pen, (float)a[2, 0], (float)a[2, 1], (float)b[2, 0], (float)b[2, 1]);
                     break;
                 case 4:
                     g.DrawLine(pen, (float)a[1, 0], (float)a[1, 1], (float)a[4, 0], (float)a[4, 1]);
                     g.DrawLine(pen, (float)b[1, 0], (float)b[1, 1], (float)b[4, 0], (float)b[4, 1]);
                     g.DrawLine(pen, (float)a[1, 0], (float)a[1, 1], (float)b[1, 0], (float)b[1, 1]);
                     g.DrawLine(pen, (float)a[4, 0], (float)a[4, 1], (float)b[4, 0], (float)b[4, 1]);
+
+                    ex.DrawLine(pen, (float)a[1, 0], (float)a[1, 1], (float)a[4, 0], (float)a[4, 1]);
+                    ex.DrawLine(pen, (float)b[1, 0], (float)b[1, 1], (float)b[4, 0], (float)b[4, 1]);
+                    ex.DrawLine(pen, (float)a[1, 0], (float)a[1, 1], (float)b[1, 0], (float)b[1, 1]);
+                    ex.DrawLine(pen, (float)a[4, 0], (float)a[4, 1], (float)b[4, 0], (float)b[4, 1]);
                     break;
                 case 5:
                     g.DrawLine(pen, (float)a[1, 0], (float)a[1, 1], (float)a[2, 0], (float)a[2, 1]);
                     g.DrawLine(pen, (float)b[1, 0], (float)b[1, 1], (float)b[2, 0], (float)b[2, 1]);
                     g.DrawLine(pen, (float)a[1, 0], (float)a[1, 1], (float)b[1, 0], (float)b[1, 1]);
                     g.DrawLine(pen, (float)a[2, 0], (float)a[2, 1], (float)b[2, 0], (float)b[2, 1]);
+
+                    ex.DrawLine(pen, (float)a[1, 0], (float)a[1, 1], (float)a[2, 0], (float)a[2, 1]);
+                    ex.DrawLine(pen, (float)b[1, 0], (float)b[1, 1], (float)b[2, 0], (float)b[2, 1]);
+                    ex.DrawLine(pen, (float)a[1, 0], (float)a[1, 1], (float)b[1, 0], (float)b[1, 1]);
+                    ex.DrawLine(pen, (float)a[2, 0], (float)a[2, 1], (float)b[2, 0], (float)b[2, 1]);
                     break;
                 case 6:
                     g.DrawLine(pen, (float)a[14, 0], (float)a[14, 1], (float)a[15, 0], (float)a[15, 1]);
                     g.DrawLine(pen, (float)b[14, 0], (float)b[14, 1], (float)b[15, 0], (float)b[15, 1]);
                     g.DrawLine(pen, (float)a[14, 0], (float)a[14, 1], (float)b[14, 0], (float)b[14, 1]);
                     g.DrawLine(pen, (float)a[15, 0], (float)a[15, 1], (float)b[15, 0], (float)b[15, 1]);
+
+                    ex.DrawLine(pen, (float)a[14, 0], (float)a[14, 1], (float)a[15, 0], (float)a[15, 1]);
+                    ex.DrawLine(pen, (float)b[14, 0], (float)b[14, 1], (float)b[15, 0], (float)b[15, 1]);
+                    ex.DrawLine(pen, (float)a[14, 0], (float)a[14, 1], (float)b[14, 0], (float)b[14, 1]);
+                    ex.DrawLine(pen, (float)a[15, 0], (float)a[15, 1], (float)b[15, 0], (float)b[15, 1]);
                     break;
                 case 7:
                     g.DrawLine(pen, (float)a[13, 0], (float)a[13, 1], (float)a[15, 0], (float)a[15, 1]);
                     g.DrawLine(pen, (float)b[13, 0], (float)b[13, 1], (float)b[15, 0], (float)b[15, 1]);
                     g.DrawLine(pen, (float)a[13, 0], (float)a[13, 1], (float)b[13, 0], (float)b[13, 1]);
                     g.DrawLine(pen, (float)a[15, 0], (float)a[15, 1], (float)b[15, 0], (float)b[15, 1]);
+
+                    ex.DrawLine(pen, (float)a[13, 0], (float)a[13, 1], (float)a[15, 0], (float)a[15, 1]);
+                    ex.DrawLine(pen, (float)b[13, 0], (float)b[13, 1], (float)b[15, 0], (float)b[15, 1]);
+                    ex.DrawLine(pen, (float)a[13, 0], (float)a[13, 1], (float)b[13, 0], (float)b[13, 1]);
+                    ex.DrawLine(pen, (float)a[15, 0], (float)a[15, 1], (float)b[15, 0], (float)b[15, 1]);
                     break;
                 case 8: // правый низ
                     g.DrawLine(pen, (float)a[11, 0], (float)a[11, 1], (float)a[12, 0], (float)a[12, 1]);
                     g.DrawLine(pen, (float)b[11, 0], (float)b[11, 1], (float)b[12, 0], (float)b[12, 1]);
                     g.DrawLine(pen, (float)a[11, 0], (float)a[11, 1], (float)b[11, 0], (float)b[11, 1]);
                     g.DrawLine(pen, (float)a[12, 0], (float)a[12, 1], (float)b[12, 0], (float)b[12, 1]);
+
+                    ex.DrawLine(pen, (float)a[11, 0], (float)a[11, 1], (float)a[12, 0], (float)a[12, 1]);
+                    ex.DrawLine(pen, (float)b[11, 0], (float)b[11, 1], (float)b[12, 0], (float)b[12, 1]);
+                    ex.DrawLine(pen, (float)a[11, 0], (float)a[11, 1], (float)b[11, 0], (float)b[11, 1]);
+                    ex.DrawLine(pen, (float)a[12, 0], (float)a[12, 1], (float)b[12, 0], (float)b[12, 1]);
                     break;
                 case 9:
                     g.DrawLine(pen, (float)a[10, 0], (float)a[10, 1], (float)a[12, 0], (float)a[12, 1]);
                     g.DrawLine(pen, (float)b[10, 0], (float)b[10, 1], (float)b[12, 0], (float)b[12, 1]);
                     g.DrawLine(pen, (float)a[10, 0], (float)a[10, 1], (float)b[10, 0], (float)b[10, 1]);
                     g.DrawLine(pen, (float)a[12, 0], (float)a[12, 1], (float)b[12, 0], (float)b[12, 1]);
+
+                    ex.DrawLine(pen, (float)a[10, 0], (float)a[10, 1], (float)a[12, 0], (float)a[12, 1]);
+                    ex.DrawLine(pen, (float)b[10, 0], (float)b[10, 1], (float)b[12, 0], (float)b[12, 1]);
+                    ex.DrawLine(pen, (float)a[10, 0], (float)a[10, 1], (float)b[10, 0], (float)b[10, 1]);
+                    ex.DrawLine(pen, (float)a[12, 0], (float)a[12, 1], (float)b[12, 0], (float)b[12, 1]);
                     break;
                 case 10:
                     g.DrawLine(pen, (float)a[9, 0], (float)a[9, 1], (float)a[17, 0], (float)a[17, 1]);
                     g.DrawLine(pen, (float)b[9, 0], (float)b[9, 1], (float)b[17, 0], (float)b[17, 1]);
                     g.DrawLine(pen, (float)a[9, 0], (float)a[9, 1], (float)b[9, 0], (float)b[9, 1]);
                     g.DrawLine(pen, (float)a[17, 0], (float)a[17, 1], (float)b[17, 0], (float)b[17, 1]);
+
+                    ex.DrawLine(pen, (float)a[9, 0], (float)a[9, 1], (float)a[17, 0], (float)a[17, 1]);
+                    ex.DrawLine(pen, (float)b[9, 0], (float)b[9, 1], (float)b[17, 0], (float)b[17, 1]);
+                    ex.DrawLine(pen, (float)a[9, 0], (float)a[9, 1], (float)b[9, 0], (float)b[9, 1]);
+                    ex.DrawLine(pen, (float)a[17, 0], (float)a[17, 1], (float)b[17, 0], (float)b[17, 1]);
                     break;
                 case 11:
                     g.DrawLine(pen, (float)a[16, 0], (float)a[16, 1], (float)a[17, 0], (float)a[17, 1]);
                     g.DrawLine(pen, (float)b[16, 0], (float)b[16, 1], (float)b[17, 0], (float)b[17, 1]);
                     g.DrawLine(pen, (float)a[16, 0], (float)a[16, 1], (float)b[16, 0], (float)b[16, 1]);
                     g.DrawLine(pen, (float)a[17, 0], (float)a[17, 1], (float)b[17, 0], (float)b[17, 1]);
+
+                    ex.DrawLine(pen, (float)a[16, 0], (float)a[16, 1], (float)a[17, 0], (float)a[17, 1]);
+                    ex.DrawLine(pen, (float)b[16, 0], (float)b[16, 1], (float)b[17, 0], (float)b[17, 1]);
+                    ex.DrawLine(pen, (float)a[16, 0], (float)a[16, 1], (float)b[16, 0], (float)b[16, 1]);
+                    ex.DrawLine(pen, (float)a[17, 0], (float)a[17, 1], (float)b[17, 0], (float)b[17, 1]);
                     break;
                 case 12: // верхушка
                     g.DrawLine(pen, (float)a[9, 0], (float)a[9, 1], (float)a[6, 0], (float)a[6, 1]);
                     g.DrawLine(pen, (float)b[9, 0], (float)b[9, 1], (float)b[6, 0], (float)b[6, 1]);
                     g.DrawLine(pen, (float)a[9, 0], (float)a[9, 1], (float)b[9, 0], (float)b[9, 1]);
                     g.DrawLine(pen, (float)a[6, 0], (float)a[6, 1], (float)b[6, 0], (float)b[6, 1]);
+
+                    ex.DrawLine(pen, (float)a[9, 0], (float)a[9, 1], (float)a[6, 0], (float)a[6, 1]);
+                    ex.DrawLine(pen, (float)b[9, 0], (float)b[9, 1], (float)b[6, 0], (float)b[6, 1]);
+                    ex.DrawLine(pen, (float)a[9, 0], (float)a[9, 1], (float)b[9, 0], (float)b[9, 1]);
+                    ex.DrawLine(pen, (float)a[6, 0], (float)a[6, 1], (float)b[6, 0], (float)b[6, 1]);
                     break;
                 case 13:
                     g.DrawLine(pen, (float)a[10, 0], (float)a[10, 1], (float)a[6, 0], (float)a[6, 1]);
                     g.DrawLine(pen, (float)b[10, 0], (float)b[10, 1], (float)b[6, 0], (float)b[6, 1]);
                     g.DrawLine(pen, (float)a[10, 0], (float)a[10, 1], (float)b[10, 0], (float)b[10, 1]);
                     g.DrawLine(pen, (float)a[6, 0], (float)a[6, 1], (float)b[6, 0], (float)b[6, 1]);
+
+                    ex.DrawLine(pen, (float)a[10, 0], (float)a[10, 1], (float)a[6, 0], (float)a[6, 1]);
+                    ex.DrawLine(pen, (float)b[10, 0], (float)b[10, 1], (float)b[6, 0], (float)b[6, 1]);
+                    ex.DrawLine(pen, (float)a[10, 0], (float)a[10, 1], (float)b[10, 0], (float)b[10, 1]);
+                    ex.DrawLine(pen, (float)a[6, 0], (float)a[6, 1], (float)b[6, 0], (float)b[6, 1]);
                     break;
                 case 14:
                     g.DrawLine(pen, (float)a[16, 0], (float)a[16, 1], (float)a[13, 0], (float)a[13, 1]);
                     g.DrawLine(pen, (float)b[16, 0], (float)b[16, 1], (float)b[13, 0], (float)b[13, 1]);
                     g.DrawLine(pen, (float)a[16, 0], (float)a[16, 1], (float)b[16, 0], (float)b[16, 1]);
                     g.DrawLine(pen, (float)a[13, 0], (float)a[13, 1], (float)b[13, 0], (float)b[13, 1]);
+
+                    ex.DrawLine(pen, (float)a[16, 0], (float)a[16, 1], (float)a[13, 0], (float)a[13, 1]);
+                    ex.DrawLine(pen, (float)b[16, 0], (float)b[16, 1], (float)b[13, 0], (float)b[13, 1]);
+                    ex.DrawLine(pen, (float)a[16, 0], (float)a[16, 1], (float)b[16, 0], (float)b[16, 1]);
+                    ex.DrawLine(pen, (float)a[13, 0], (float)a[13, 1], (float)b[13, 0], (float)b[13, 1]);
                     break;
                 case 15:
                     g.DrawLine(pen, (float)a[14, 0], (float)a[14, 1], (float)a[8, 0], (float)a[8, 1]);
                     g.DrawLine(pen, (float)b[14, 0], (float)b[14, 1], (float)b[8, 0], (float)b[8, 1]);
                     g.DrawLine(pen, (float)a[14, 0], (float)a[14, 1], (float)b[14, 0], (float)b[14, 1]);
                     g.DrawLine(pen, (float)a[8, 0], (float)a[8, 1], (float)b[8, 0], (float)b[8, 1]);
+
+                    ex.DrawLine(pen, (float)a[14, 0], (float)a[14, 1], (float)a[8, 0], (float)a[8, 1]);
+                    ex.DrawLine(pen, (float)b[14, 0], (float)b[14, 1], (float)b[8, 0], (float)b[8, 1]);
+                    ex.DrawLine(pen, (float)a[14, 0], (float)a[14, 1], (float)b[14, 0], (float)b[14, 1]);
+                    ex.DrawLine(pen, (float)a[8, 0], (float)a[8, 1], (float)b[8, 0], (float)b[8, 1]);
                     break;
                 case 16:
                     g.DrawLine(pen, (float)a[11, 0], (float)a[11, 1], (float)a[7, 0], (float)a[7, 1]);
                     g.DrawLine(pen, (float)b[11, 0], (float)b[11, 1], (float)b[7, 0], (float)b[7, 1]);
                     g.DrawLine(pen, (float)a[11, 0], (float)a[11, 1], (float)b[11, 0], (float)b[11, 1]);
                     g.DrawLine(pen, (float)a[7, 0], (float)a[7, 1], (float)b[7, 0], (float)b[7, 1]);
+
+                    ex.DrawLine(pen, (float)a[11, 0], (float)a[11, 1], (float)a[7, 0], (float)a[7, 1]);
+                    ex.DrawLine(pen, (float)b[11, 0], (float)b[11, 1], (float)b[7, 0], (float)b[7, 1]);
+                    ex.DrawLine(pen, (float)a[11, 0], (float)a[11, 1], (float)b[11, 0], (float)b[11, 1]);
+                    ex.DrawLine(pen, (float)a[7, 0], (float)a[7, 1], (float)b[7, 0], (float)b[7, 1]);
                     break;
                 default:
                     break;
