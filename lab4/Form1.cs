@@ -125,7 +125,11 @@ namespace lab4
 
         private void button1_Click(object sender, EventArgs e)
         {
+            Bitmap mainImage = new Bitmap(pb.Image);
+            Bitmap extraImage = new Bitmap(pb.Width, pb.Height);
+            Cleaner.DeleteLines(mainImage, extraImage);
             pb.Image = null;
+            pb.Image = mainImage;
         }
     }
 }
