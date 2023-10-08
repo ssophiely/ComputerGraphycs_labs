@@ -12,10 +12,10 @@ namespace lab4
     {
         private const double xc = 1231 / 2;
 
-        private const double yc = 502 / 2;
+        private const double yc = 501 / 2;
 
         // коэффициент увеличения
-        public static int K = 10;
+        public static int K = 12;
 
         // экранные координаты передней части 
         public static double[,] coordinateMatrixF;
@@ -86,16 +86,15 @@ namespace lab4
         // Отрисовка 2D изображения
         public static void DrawXY(Graphics g, Pen pen, double[,] matrix)
         {
-
-                for (int i = 0; i < contiguityMatrix.GetUpperBound(0) + 1; i++)
+            for (int i = 0; i < contiguityMatrix.GetUpperBound(0) + 1; i++)
+            {
+                for (int j = 0; j < contiguityMatrix.GetUpperBound(0) + 1; j++)
                 {
-                    for (int j = 0; j < contiguityMatrix.GetUpperBound(0) + 1; j++)
-                    {
-                        if (contiguityMatrix[i, j] == 1) // смотрим по матрице смежности
-                            g.DrawLine(pen, (float)matrix[i, 0], (float)matrix[i, 1],
-                                (float)matrix[j, 0], (float)matrix[j, 1]);
-                    }
+                    if (contiguityMatrix[i, j] == 1) // смотрим по матрице смежности
+                        g.DrawLine(pen, (float)matrix[i, 0], (float)matrix[i, 1],
+                            (float)matrix[j, 0], (float)matrix[j, 1]);
                 }
+            }
         }
 
         // Отрисовка связей для объема фигуры

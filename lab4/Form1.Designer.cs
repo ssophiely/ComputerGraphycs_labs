@@ -335,7 +335,7 @@
             // 
             this.pb.Location = new System.Drawing.Point(12, 178);
             this.pb.Name = "pb";
-            this.pb.Size = new System.Drawing.Size(1231, 502);
+            this.pb.Size = new System.Drawing.Size(1231, 501);
             this.pb.TabIndex = 25;
             this.pb.TabStop = false;
             // 
@@ -343,6 +343,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1255, 692);
             this.Controls.Add(this.pb);
             this.Controls.Add(this.button1);
