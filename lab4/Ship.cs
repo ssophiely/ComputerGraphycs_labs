@@ -76,6 +76,7 @@ namespace lab4
             return m;
         }
 
+        // Настройка системы координат
         private static void SetGraphics(Graphics g)
         {
             // Преобразование системы отсчета

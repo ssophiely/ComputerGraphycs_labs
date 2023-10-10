@@ -35,8 +35,11 @@ namespace lab4
 
         private void DrawBaseC_Click(object sender, EventArgs e)
         {
-            Bitmap bmp = new Bitmap(pb.ClientSize.Width, pb.ClientSize.Height); g = Graphics.FromImage(bmp);
+            Bitmap bmp = new Bitmap(pb.ClientSize.Width, pb.ClientSize.Height); 
+            g = Graphics.FromImage(bmp);
+
             Ship.Draw(g, new Pen(Color.Black, 2), Ship.coordinateMatrixF, Ship.coordinateMatrixB);
+
             pb.Image = bmp;
 
         }
@@ -47,9 +50,10 @@ namespace lab4
             pb.Image = null;
 
             Bitmap bmp = new Bitmap(pb.ClientSize.Width, pb.ClientSize.Height);
-
             g = Graphics.FromImage(bmp);
+
             Ship.RotateShipX(g, angle);
+
             pb.Image = bmp;
         }
 
@@ -59,9 +63,10 @@ namespace lab4
             pb.Image = null;
 
             Bitmap bmp = new Bitmap(pb.ClientSize.Width, pb.ClientSize.Height);
-
             g = Graphics.FromImage(bmp);
+
             Ship.RotateShipY(g, angle);
+
             pb.Image = bmp;
         }
 
@@ -71,9 +76,10 @@ namespace lab4
             pb.Image = null;
 
             Bitmap bmp = new Bitmap(pb.ClientSize.Width, pb.ClientSize.Height);
-
             g = Graphics.FromImage(bmp);
+
             Ship.RotateShipZ(g, angle);
+
             pb.Image = bmp;
         }
 
@@ -86,9 +92,10 @@ namespace lab4
             pb.Image = null;
 
             Bitmap bmp = new Bitmap(pb.ClientSize.Width, pb.ClientSize.Height);
-
             g = Graphics.FromImage(bmp);
+
             Ship.Scale(g, x, y, z);
+
             pb.Image = bmp;
         }
 
@@ -102,7 +109,9 @@ namespace lab4
 
             Bitmap bmp = new Bitmap(pb.ClientSize.Width, pb.ClientSize.Height);
             g = Graphics.FromImage(bmp);
+
             Ship.Move(g, x, y, z);
+
             pb.Image = bmp;
         }
 
@@ -110,7 +119,9 @@ namespace lab4
         {
             Bitmap bmp = new Bitmap(pb.ClientSize.Width, pb.ClientSize.Height);
             g = Graphics.FromImage(bmp);
+
             Ship.DrawCavalier(g);
+
             pb.Image = bmp;
         }
 
@@ -118,17 +129,18 @@ namespace lab4
         {
             pb.Image = null;
 
-            Bitmap bmp = new Bitmap(pb.ClientSize.Width, pb.ClientSize.Height);
-            g = Graphics.FromImage(bmp);
             Ship.Reset();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             pb.Image = null;
+
             Bitmap mainImage = new Bitmap(pb.Width, pb.Height);
             Bitmap extraImage = new Bitmap(pb.Width, pb.Height);
+
             Cleaner.DeleteLines(mainImage, extraImage);
+
             pb.Image = mainImage;
         }
     }

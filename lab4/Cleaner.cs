@@ -244,31 +244,34 @@ namespace lab4
             int w = extra.Width;
             int h = extra.Height;
 
-            // буфер заполнили минимальными значениями
+            // буфер заполнили максимальными значениями, т.к. OZ от нас, передние грани будут с минимальными значениями z
             buffer = new int[h, w];
             for (int i = 0; i < h; i++)
             {
                 for (int j = 0; j < w; j++)
                 {
-                    buffer[i, j] = Int32.MinValue;
+                    buffer[i, j] = Int32.MaxValue;
                 }
             }
 
+            // графика для вспомогательного bitmap
             Graphics eg = Graphics.FromImage(extra);
             eg.TranslateTransform((float)w / 2, (float)h / 2);
             eg.ScaleTransform(1.0F, -1.0F);
             eg.Clear(Color.White);
 
+            // графика для основного bitmap, который на форме отображается
             Graphics mg = Graphics.FromImage(main);
             mg.TranslateTransform((float)w / 2, (float)h / 2);
             mg.ScaleTransform(1.0F, -1.0F);
             mg.Clear(Color.White);
 
-
+            // Получили матрицу с коэффициентами плоскостей для текущего момента
             var m = Cleaner.CreateMatrix().Clone() as double[,];
 
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 17; i++)
             {
+                // Рисуем каждую грань на вспомогательном 
                 DrawPlane(i, eg, new Pen(Color.Black, 2));
 
                 // просматриваем грань 
@@ -280,35 +283,38 @@ namespace lab4
 
                         if (pix.R == 0 && pix.G == 0 && pix.B == 0)
                         {
-                            int xx = x - 616;
-                            int yy = 250 - y;
+                            int xx = x - w / 2; // тут вопросы???
+                            int yy = h / 2 - y;
 
-                            // обработали первый черный пиксель в ряду
+                            // первый черный пиксель
                             var z = (int)-((m[0, i] * xx + m[1, i] * yy + m[3, i]) / m[2, i]);
-                            if (z > buffer[y, x])
+                            if (z < buffer[y, x])    // Ecли z < значения из буфера, рисуем его на основном bitmap
                             {
                                 main.SetPixel(x, y, Color.FromArgb(0, 0, 0));
                                 buffer[y, x] = z;
                             }
 
+                            // Просматриваем линию до конца, находим индекс последнего черного пикселя,
+                            // чтобы обозначить границы плоскости 
                             int ind = x + 1;
                             for (int k = x + 1; k < w; k++)
                             {
                                 Color px = extra.GetPixel(k, y);
-                                if (px.R == 0 && px.G == 0 && px.B == 0)
+                                if (px.R == 0 && px.G == 0 && px.B == 0) // если пиксель черный
                                 {
                                     var z1 = (int)-((m[0, i] * (k - 616) + m[1, i] * yy + m[3, i]) / m[2, i]);
 
-                                    if (z1 > buffer[y, k])
+                                    if (z1 < buffer[y, k]) // Ecли z < значения из буфера (он ближе), рисуем его на основном bitmap
                                     {
                                         main.SetPixel(k, y, Color.FromArgb(0, 0, 0));
                                         buffer[y, k] = z1;
                                     }
 
-                                    ind = k;
+                                    ind = k; // сохраняем его  индекс
                                 }
                             }
 
+                            // Проходимся по линии внутри плоскости
                             for (int k = x + 1; k < ind; k++)
                             {
                                 Color p = extra.GetPixel(k, y);
@@ -316,7 +322,7 @@ namespace lab4
                                 {
                                     var z1 = (int)-((m[0, i] * (k - 616) + m[1, i] * yy + m[3, i]) / m[2, i]);
 
-                                    if (z1 > buffer[y, k])
+                                    if (z1 < buffer[y, k]) // если пиксель белый и ближе, закрашиваем белым этот пиксель на основном
                                     {
                                         main.SetPixel(k, y, Color.FromArgb(255, 255, 255));
                                         buffer[y, k] = z1;
@@ -368,14 +374,14 @@ namespace lab4
                     }
                     break;
 
-                case 2:                    
+                case 2:
                     ex.DrawLine(pen, (float)a[5, 0], (float)a[5, 1], (float)a[4, 0], (float)a[4, 1]);
                     ex.DrawLine(pen, (float)b[5, 0], (float)b[5, 1], (float)b[4, 0], (float)b[4, 1]);
                     ex.DrawLine(pen, (float)a[5, 0], (float)a[5, 1], (float)b[5, 0], (float)b[5, 1]);
                     ex.DrawLine(pen, (float)a[4, 0], (float)a[4, 1], (float)b[4, 0], (float)b[4, 1]);
                     break;
 
-                case 3: 
+                case 3:
                     ex.DrawLine(pen, (float)a[2, 0], (float)a[2, 1], (float)a[5, 0], (float)a[5, 1]);
                     ex.DrawLine(pen, (float)b[2, 0], (float)b[2, 1], (float)b[5, 0], (float)b[5, 1]);
                     ex.DrawLine(pen, (float)a[5, 0], (float)a[5, 1], (float)b[5, 0], (float)b[5, 1]);
